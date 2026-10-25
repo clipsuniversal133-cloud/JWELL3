@@ -1,33 +1,19 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ArrowLeft, ChevronRight, Heart, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
 import SiteFooter from '../../components/site-footer'
 import { money, products, type Product } from '../../lib/products'
-import { CART_KEY, type CartLine } from '../../lib/cart'
 import { useCart } from '../../lib/use-cart'
 import { useWishlist } from '../../lib/use-wishlist'
 import styles from './cart.module.css'
 
 const shippingCharge = 99
-const previewCart: CartLine[] = [
-  { slug: 'crystal-drop-earrings', quantity: 1 },
-  { slug: 'pearl-stud-earrings', quantity: 1 },
-  { slug: 'kundan-jhumka-earrings', quantity: 1 },
-]
 
 export default function CartPage() {
-  const { lines, hydrated, addToCart, removeFromCart, updateQuantity, setLines } = useCart()
+  const { lines, hydrated, addToCart, removeFromCart, updateQuantity } = useCart()
   const wishlist = useWishlist()
   const [notice, setNotice] = useState('')
-
-  useEffect(() => {
-    if (hydrated && lines.length === 0) {
-      try {
-        if (!window.sessionStorage.getItem(CART_KEY)) setLines(previewCart)
-      } catch { /* session storage is optional in preview environments */ }
-    }
-  }, [hydrated, lines.length, setLines])
 
   const cartItems = lines.flatMap((line) => { const product = products.find((item) => item.slug === line.slug); return product ? [{ product, quantity: line.quantity }] : [] })
   const subtotal = useMemo(() => cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0), [cartItems])

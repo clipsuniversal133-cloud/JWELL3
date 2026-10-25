@@ -27,7 +27,7 @@ const faqGroups: { group: string; items: [string, string][] }[] = [
   {
     group: 'Delivery & Shipping',
     items: [
-      ['What are the delivery charges and time?', 'Delivery is free on purchases above ₹2,000. A ₹100 delivery charge applies to purchases below ₹2,000. Expected delivery time is 5–7 days.'],
+      ['What are the delivery charges and time?', 'Delivery charges and any free-shipping threshold are pending confirmation. Expected delivery time is 5–7 days.'],
       ['Do you ship across India?', 'We currently ship across India. Serviceability to specific pin codes will be confirmed at checkout once the order system is live.'],
       ['Is Cash on Delivery available?', 'No. Online payment is accepted through the configured payment flow. Cash on Delivery is not available.'],
     ],
